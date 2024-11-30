@@ -29,38 +29,38 @@ def fetch_stock_info(ticker_symbol: str):
         # Dividendos históricos
         dividends = stock.dividends
         
-        # Informações detalhadas
+        # Informações detalhadas sobre a ação
         data = {
-            "Nome Completo": info.get("longName", "Não disponível"),
-            "Setor": info.get("sector", "Não disponível"),
-            "Indústria": info.get("industry", "Não disponível"),
-            "Site Oficial": info.get("website", "Não disponível"),
-            "Endereço": f"{info.get('address1', 'Não disponível')}, {info.get('city', '')}, {info.get('country', '')}",
-            "Telefone": info.get("phone", "Não disponível"),
-            "Logo da Empresa": info.get("logo_url", "Não disponível"),
-            "Preço Atual": info.get("regularMarketPrice", "Não disponível"),
-            "Preço de Abertura": info.get("regularMarketOpen", "Não disponível"),
-            "Fechamento Anterior": info.get("regularMarketPreviousClose", "Não disponível"),
-            "Volume Negociado": info.get("regularMarketVolume", "Não disponível"),
-            "Valor de Mercado": info.get("marketCap", "Não disponível"),
-            "P/L Trailing": info.get("trailingPE", "Não disponível"),
-            "P/L Forward": info.get("forwardPE", "Não disponível"),
-            "Taxa de Dividendos (%)": info.get("dividendYield", "Não disponível"),
-            "Beta": info.get("beta", "Não disponível"),
-            "Número de Funcionários": info.get("fullTimeEmployees", "Não disponível"),
-            "Crescimento Trimestral dos Lucros (%)": info.get("earningsQuarterlyGrowth", "Não disponível"),
-            "Próxima Data de Dividendos": info.get("dividendDate", "Não disponível"),
-            "Data Ex-Dividendo": info.get("exDividendDate", "Não disponível"),
-            "Moeda": info.get("currency", "Não disponível"),
-            "País": info.get("country", "Não disponível"),
-            "Código da Ação": info.get("symbol", "Não disponível"),
-            "Dividendos Históricos": dividends.to_dict() if not dividends.empty else "Sem dividendos registrados"
+            "full_name": info.get("longName", "Unavailable"),
+            "sector": info.get("sector", "Unavailable"),
+            "industry": info.get("industry", "Unavailable"),
+            "official_website": info.get("website", "Unavailable"),
+            "address": f"{info.get('address1', 'Unavailable')}, {info.get('city', '')}, {info.get('country', '')}",
+            "phone": info.get("phone", "Unavailable"),
+            "logo_url": info.get("logo_url", "Unavailable"),
+            "current_price": info.get("regularMarketPrice", "Unavailable"),
+            "opening_price": info.get("regularMarketOpen", "Unavailable"),
+            "previous_close": info.get("regularMarketPreviousClose", "Unavailable"),
+            "traded_volume": info.get("regularMarketVolume", "Unavailable"),
+            "market_cap": info.get("marketCap", "Unavailable"),
+            "pe_trailing": info.get("trailingPE", "Unavailable"),
+            "pe_forward": info.get("forwardPE", "Unavailable"),
+            "dividend_yield_percentage": info.get("dividendYield", "Unavailable"),
+            "beta": info.get("beta", "Unavailable"),
+            "number_of_employees": info.get("fullTimeEmployees", "Unavailable"),
+            "quarterly_earnings_growth_percentage": info.get("earningsQuarterlyGrowth", "Unavailable"),
+            "next_dividend_date": info.get("dividendDate", "Unavailable"),
+            "ex_dividend_date": info.get("exDividendDate", "Unavailable"),
+            "currency": info.get("currency", "Unavailable"),
+            "country": info.get("country", "Unavailable"),
+            "stock_symbol": info.get("symbol", "Unavailable"),
+            "historical_dividends": dividends.to_dict() if not dividends.empty else []
         }
 
         return data
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Erro ao buscar informações para {ticker_symbol}: {e}")
+        raise HTTPException(status_code=500, detail=f"Error fetching information for {ticker_symbol}: {str(e)}")
 
 @app.get("/stock/{ticker_symbol}")
 async def get_stock_data(ticker_symbol: str):
@@ -69,5 +69,5 @@ async def get_stock_data(ticker_symbol: str):
     """
     stock_data = fetch_stock_info(ticker_symbol)
     if not stock_data:
-        raise HTTPException(status_code=404, detail="Informações da ação não encontradas.")
+        raise HTTPException(status_code=404, detail="Stock information not found.")
     return stock_data
