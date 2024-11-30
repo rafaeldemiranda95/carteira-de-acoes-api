@@ -3,6 +3,10 @@ import yfinance as yf
 
 app = FastAPI()
 
+@app.get("/")
+async def root():
+    return {"message": "OK"}
+
 def format_ticker(ticker_symbol: str) -> str:
     """
     Adiciona '.SA' ao final do ticker, caso ele não tenha.
