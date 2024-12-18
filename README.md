@@ -35,11 +35,3 @@ Antes de iniciar, certifique-se de ter instalado:
 - **pip** para gerenciar pacotes Python.
 - Um servidor Laravel configurado para receber as requisições.
 
----
-
-## Instalação
-
-1. Clone este repositório:
-   ```bash
-   git clone https://github.com/seu-usuario/nome-do-repositorio.git
-   cd nome-do-repositorio
